@@ -1,0 +1,56 @@
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
+    }
+}
+
+apply plugin: 'maven'
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+mainClassName = 'com.n26.transactions.TransactionsApp'
+
+// Apply the java plugin to add support for Java
+apply plugin: 'java'
+
+repositories {
+    // Use 'jcenter' for resolving your dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    jcenter()
+}
+
+// In this section you declare the dependencies for your production and test code
+dependencies {
+    // The production code uses the SLF4J logging API at compile time
+    compile 'org.slf4j:slf4j-api:1.7.21'
+
+	// Dropwizard
+	compile 'io.dropwizard:dropwizard-core:0.9.1'
+	compile 'io.dropwizard:dropwizard-auth:0.9.1'
+	
+    //tests
+    testCompile "junit:junit:4.11"   
+    testCompile 'org.mockito:mockito-all:1.10.19'
+    
+    // Dependency injection
+    compile 'com.google.inject:guice:4.0'
+	compile 'com.hubspot.dropwizard:dropwizard-guice:0.8.4.0'
+}
+
+// Configure the shadow jar task
+shadowJar {
+    mergeServiceFiles()
+    exclude 'META-INF/*.DSA'
+    exclude 'META-INF/*.RSA'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
+}
