@@ -1,30 +1,21 @@
 package com.n26.transactions.model;
 
-public class Transaction {
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-	private long id;
+public class TransactionDTO {
+
 	private long amount;
 	private String type;
+	@JsonProperty("parent_id")
 	private Long parentId;
 
-	public Transaction(long id, long amount, String type, Long parentId) {
-		this.id = id;
-		this.amount = amount;
-		this.type = type;
-		this.parentId = parentId;
-	}
-	
-	public Transaction(long id,TransactionDTO transactionDTO){
-		this(id,transactionDTO.getAmount(), transactionDTO.getType(), transactionDTO.getParentId());
-		
+	public TransactionDTO() {
 	}
 
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
+	public TransactionDTO(Transaction transaction) {
+		this.amount = transaction.getAmount();
+		this.type = transaction.getType();
+		this.parentId = transaction.getParentId();
 	}
 
 	public long getAmount() {

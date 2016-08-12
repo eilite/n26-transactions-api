@@ -1,0 +1,79 @@
+{
+	"variables": [],
+	"info": {
+		"name": "n26-transactions",
+		"_postman_id": "e50203a5-f788-e1a3-6ebb-a5f7adc7472f",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get transactions by type",
+			"request": {
+				"url": "localhost:8080/transactionservice/types/{type}",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": "    "
+			},
+			"response": []
+		},
+		{
+			"name": "create or update transaction with parent id",
+			"request": {
+				"url": "localhost:8080/transactionservice/transaction/{id}",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n    \"amount\":5000,\n    \"type\":\"eggs\",\n    \"parent_id\":1\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get transaction by id",
+			"request": {
+				"url": "localhost:8080/transactionservice/transaction/2",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "create or update transaction",
+			"request": {
+				"url": "localhost:8080/transactionservice/transaction/{id}",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n    \"amount\":5000,\n    \"type\":\"eggs\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

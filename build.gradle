@@ -40,6 +40,12 @@ dependencies {
     // Dependency injection
     compile 'com.google.inject:guice:4.0'
 	compile 'com.hubspot.dropwizard:dropwizard-guice:0.8.4.0'
+	
+	//apache commons collection
+	compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.0'
+	
+    compile 'com.google.guava:guava:18.0'
+	
 }
 
 // Configure the shadow jar task
