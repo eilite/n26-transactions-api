@@ -13,7 +13,6 @@ import javax.ws.rs.core.Response;
 
 import com.n26.transactions.model.RequestResult;
 import com.n26.transactions.model.SumDTO;
-import com.n26.transactions.model.Transaction;
 import com.n26.transactions.model.TransactionDTO;
 import com.n26.transactions.services.TransactionsService;
 
@@ -38,8 +37,8 @@ public class TransactionResource {
 	@GET
 	@Path("/transaction/{transactionId}")
 	public Response getTransaction(@PathParam(value = "transactionId") long transactionId) {
-		Transaction transaction = this.transactionsService.getTransaction(transactionId);
-		return Response.ok(transaction).build();
+		TransactionDTO transactionDTO = this.transactionsService.getTransaction(transactionId);
+		return Response.ok(transactionDTO).build();
 	}
 
 	@GET

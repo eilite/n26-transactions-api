@@ -2,8 +2,8 @@ package com.n26.transactions;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
-import com.n26.transactions.dao.ParentsDao;
-import com.n26.transactions.dao.ParentsDaoImpl;
+import com.n26.transactions.dao.ParentTransactionDao;
+import com.n26.transactions.dao.ParentTransactionDaoImpl;
 import com.n26.transactions.dao.TransactionDao;
 import com.n26.transactions.dao.TransactionDaoImpl;
 import com.n26.transactions.services.TransactionsService;
@@ -13,7 +13,7 @@ public class TransactionModule extends AbstractModule {
 
 	private TransactionsService transactionsService;
 	private TransactionDao transactionDao;
-	private ParentsDao parentsDao;
+	private ParentTransactionDao parentTransactionDao;
 
 	private TransactionDao provideTransactionDao() {
 		if (this.transactionDao == null) {
@@ -21,18 +21,19 @@ public class TransactionModule extends AbstractModule {
 		}
 		return this.transactionDao;
 	}
-	
-	private ParentsDao provideParentsDao() {
-		if (this.parentsDao == null) {
-			this.parentsDao = new ParentsDaoImpl();
+
+	private ParentTransactionDao provideParentDao() {
+		if (this.parentTransactionDao == null) {
+			this.parentTransactionDao = new ParentTransactionDaoImpl();
 		}
-		return this.parentsDao;
+		return this.parentTransactionDao;
 	}
 
 	@Provides
 	public TransactionsService provideTransactionService() {
 		if (this.transactionsService == null) {
-			this.transactionsService = new TransactionsServiceImpl(this.provideTransactionDao(), this.provideParentsDao());
+			this.transactionsService = new TransactionsServiceImpl(this.provideTransactionDao(),
+					this.provideParentDao());
 		}
 		return this.transactionsService;
 	}

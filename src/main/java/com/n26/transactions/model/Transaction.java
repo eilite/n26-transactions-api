@@ -1,22 +1,24 @@
 package com.n26.transactions.model;
 
-public class Transaction {
 
+public class Transaction {
 	private long id;
-	private long amount;
+	private double amount;
 	private String type;
 	private Long parentId;
 
-	public Transaction(long id, long amount, String type, Long parentId) {
+	public Transaction() {
+	}
+
+	public Transaction(long id, double amount, String type, Long parentId) {
 		this.id = id;
 		this.amount = amount;
 		this.type = type;
 		this.parentId = parentId;
 	}
 	
-	public Transaction(long id,TransactionDTO transactionDTO){
-		this(id,transactionDTO.getAmount(), transactionDTO.getType(), transactionDTO.getParentId());
-		
+	public Transaction(long id, TransactionDTO transactionDTO){
+		this(id, transactionDTO.getAmount(), transactionDTO.getType(), transactionDTO.getParentId());
 	}
 
 	public long getId() {
@@ -27,11 +29,11 @@ public class Transaction {
 		this.id = id;
 	}
 
-	public long getAmount() {
+	public double getAmount() {
 		return amount;
 	}
 
-	public void setAmount(long amount) {
+	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 

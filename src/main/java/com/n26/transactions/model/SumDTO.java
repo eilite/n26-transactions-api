@@ -1,17 +1,17 @@
 package com.n26.transactions.model;
 
 public class SumDTO {
-	private long sum;
+	private double sum;
 
-	private SumDTO(long sum) {
+	public SumDTO(double sum) {
 		this.sum = sum;
 	}
 
-	public long getSum() {
+	public double getSum() {
 		return sum;
 	}
 
-	public void setSum(long sum) {
+	public void setSum(double sum) {
 		this.sum = sum;
 	}
 

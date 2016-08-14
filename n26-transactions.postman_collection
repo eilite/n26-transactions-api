@@ -8,16 +8,22 @@
 	},
 	"item": [
 		{
-			"name": "get transactions by type",
+			"name": "create or update transaction",
 			"request": {
-				"url": "localhost:8080/transactionservice/types/{type}",
-				"method": "GET",
-				"header": [],
+				"url": "localhost:8080/transactionservice/transaction/{id}",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
 				"body": {
-					"mode": "formdata",
-					"formdata": []
+					"mode": "raw",
+					"raw": "{ \n    \"amount\":5000,\n    \"type\":\"eggs\"\n}"
 				},
-				"description": "    "
+				"description": ""
 			},
 			"response": []
 		},
@@ -44,7 +50,7 @@
 		{
 			"name": "get transaction by id",
 			"request": {
-				"url": "localhost:8080/transactionservice/transaction/2",
+				"url": "localhost:8080/transactionservice/transaction/{transactionId}",
 				"method": "GET",
 				"header": [],
 				"body": {
@@ -56,20 +62,28 @@
 			"response": []
 		},
 		{
-			"name": "create or update transaction",
+			"name": "get transactions by type",
 			"request": {
-				"url": "localhost:8080/transactionservice/transaction/{id}",
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
-					}
-				],
+				"url": "localhost:8080/transactionservice/types/{type}",
+				"method": "GET",
+				"header": [],
 				"body": {
-					"mode": "raw",
-					"raw": "{ \n    \"amount\":5000,\n    \"type\":\"eggs\"\n}"
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": "    "
+			},
+			"response": []
+		},
+		{
+			"name": "get transactions sum for transaction id",
+			"request": {
+				"url": "localhost:8080/transactionservice/sum/{transactionId}",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
 				},
 				"description": ""
 			},
