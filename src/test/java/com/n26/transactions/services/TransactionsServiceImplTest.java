@@ -6,6 +6,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import javax.ws.rs.BadRequestException;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -86,6 +88,14 @@ public class TransactionsServiceImplTest {
 		fixture.saveParent(transactionId, parentTransactionId);
 
 		verify(parentTransactionDao).addParents(transactionId, Sets.newHashSet(parent, grandParent));
+	}
+	
+	@Test(expected = BadRequestException.class)
+	public void saveParent_NOK() {
+		long transactionId = 2;
+		long parentTransactionId = 2;
+
+		fixture.saveParent(transactionId, parentTransactionId);
 	}
 
 	// test get transaction method

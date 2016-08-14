@@ -5,6 +5,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.ws.rs.NotFoundException;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response.Status;
 
 import com.google.common.collect.Maps;
 import com.n26.transactions.model.Transaction;
@@ -19,16 +21,18 @@ public class TransactionDaoImpl implements TransactionDao {
 
 	@Override
 	public void saveTransaction(Transaction t) {
+		if (this.transactions.containsKey(t.getId())) {
+			throw new WebApplicationException("transaction already exists", Status.CONFLICT);
+		}
 		this.transactions.put(t.getId(), t);
 	}
 
 	@Override
 	public Transaction getTransaction(long transactionId) {
-		Transaction transaction = this.transactions.get(transactionId);
-		if (transaction == null) {
+		if (!this.transactions.containsKey(transactionId)) {
 			throw new NotFoundException("transaction not found");
 		}
-		return transaction;
+		return this.transactions.get(transactionId);
 	}
 
 	@Override

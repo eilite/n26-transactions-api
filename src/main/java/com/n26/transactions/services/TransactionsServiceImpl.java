@@ -2,6 +2,8 @@ package com.n26.transactions.services;
 
 import java.util.Set;
 
+import javax.ws.rs.BadRequestException;
+
 import org.apache.commons.collections4.CollectionUtils;
 
 import com.n26.transactions.dao.ParentTransactionDao;
@@ -38,7 +40,10 @@ public class TransactionsServiceImpl implements TransactionsService {
 	 * @param parentId
 	 *            transaction parent Id
 	 */
-	protected void saveParent(long childId, Long parentId) {
+	protected void saveParent(long childId, long parentId) {
+		if(childId == parentId){
+			throw new BadRequestException("transaction id and parent id cannot be the same");
+		}
 		Transaction parent = this.transactionDao.getTransaction(parentId);
 		Set<Transaction> parents = Sets.newHashSet(parent);
 		Set<Transaction> grandParents = this.parentTransactionDao.getParents(parent.getId());
@@ -67,7 +72,9 @@ public class TransactionsServiceImpl implements TransactionsService {
 
 		Set<Transaction> parents = this.parentTransactionDao.getParents(transactionId);
 		if (CollectionUtils.isNotEmpty(parents)) {
-			sum += parents.stream().map(parent -> parent.getAmount()).reduce(0D, (a, b) -> a + b);
+			sum += parents.stream()
+					.map(parent -> parent.getAmount())
+					.reduce(0D, (a, b) -> a + b);
 		}
 
 		return new SumDTO(sum);
