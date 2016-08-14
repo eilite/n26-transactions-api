@@ -3,7 +3,7 @@
 
 This project is my implementation for this [code challenge](https://github.com/eilite/n26-transactions-api/blob/master/Number26_JavaCodeChallenge.pdf)
 
-To run this project :
+To run this api (8080 by default):
 
 
 ```
