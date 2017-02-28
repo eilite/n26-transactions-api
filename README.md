@@ -11,4 +11,4 @@ gradle shadow
 java -jar build/libs/n26-transactions-api-all.jar server
 ```
 
-You can start trying the endpoints by importing [n26-transactions.postman_collection](https://github.com/eilite/n26-transactions-api/blob/master/n26-transactions.postman_collection) in postman 
+You can try the endpoints by importing [n26-transactions.postman_collection](https://github.com/eilite/n26-transactions-api/blob/master/n26-transactions.postman_collection) in postman 
